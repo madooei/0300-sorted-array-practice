@@ -8,23 +8,17 @@ package practice;
  */
 public class Leaderboard<T extends Comparable<T>> {
 
-  private T[] arr;       // elements stay sorted ascending in [0, size)
-  private int size;      // how many elements are currently on the board
-  private final int k;   // the most elements the board will ever hold
+  private T[] arr;       // sorted descending in [0, size)
+  private int size;
+  private final int k;
 
-  // Same cast rationale as SortedArray: a Comparable[] viewed as T[], because T
-  // is bounded by Comparable and we cannot create an array of a type parameter.
-  // We allocate k + 1 slots so add can insert before trimming back to k.
-  @SuppressWarnings({"unchecked", "rawtypes"})
+  // k + 1 slots: add briefly holds k + 1 elements before trimming back to k.
+  @SuppressWarnings("unchecked")
   public Leaderboard(int k) {
     // TODO: Implement me
     throw new UnsupportedOperationException("TODO: Implement me");
   }
 
-  // Offer value to the board. A full board only accepts a value that beats its
-  // current smallest; anything that can't make the cut is rejected up front, so
-  // we never shift for a value that would just fall off again. When a full board
-  // does accept a value, the smallest element drops off to keep size at k.
   public void add(T value) {
     // TODO: Implement me
     throw new UnsupportedOperationException("TODO: Implement me");
@@ -46,9 +40,7 @@ public class Leaderboard<T extends Comparable<T>> {
     return k;
   }
 
-  // Returns where value sits, or, if absent, where it would have to go to keep
-  // the array sorted. The same binary search SortedArray uses to place a value.
-  // Pre: arr is sorted in [0, size), which add maintains.
+  // Same as SortedArray.insertionPoint, mirrored for descending order.
   private int insertionPoint(T value) {
     int low = 0;
     int high = size - 1;
@@ -57,7 +49,7 @@ public class Leaderboard<T extends Comparable<T>> {
       int cmp = arr[mid].compareTo(value);
       if (cmp == 0) {
         return mid;
-      } else if (cmp < 0) {
+      } else if (cmp > 0) {
         low = mid + 1;
       } else {
         high = mid - 1;
@@ -66,11 +58,8 @@ public class Leaderboard<T extends Comparable<T>> {
     return low;
   }
 
-  // Remove the smallest element (index 0) by shifting the rest one slot left.
+  // The smallest score sits at the last used index, so dropping it needs no shift.
   private void dropSmallest() {
-    for (int j = 0; j < size - 1; j++) {
-      arr[j] = arr[j + 1];
-    }
     size--;
     arr[size] = null;
   }
