@@ -17,12 +17,8 @@ public class Leaderboard<T extends Comparable<T>> {
   // We allocate k + 1 slots so add can insert before trimming back to k.
   @SuppressWarnings({"unchecked", "rawtypes"})
   public Leaderboard(int k) {
-    if (k <= 0) {
-      throw new IllegalArgumentException("capacity must be positive");
-    }
-    this.k = k;
-    arr = (T[]) new Comparable[k + 1];
-    size = 0;
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   // Offer value to the board. A full board only accepts a value that beats its
@@ -30,25 +26,16 @@ public class Leaderboard<T extends Comparable<T>> {
   // we never shift for a value that would just fall off again. When a full board
   // does accept a value, the smallest element drops off to keep size at k.
   public void add(T value) {
-    if (size == k && value.compareTo(arr[0]) <= 0) {
-      return;                    // can't beat the lowest score — doesn't make the cut
-    }
-    int i = insertionPoint(value);
-    for (int j = size; j > i; j--) {
-      arr[j] = arr[j - 1];       // shift larger elements one slot right
-    }
-    arr[i] = value;
-    size++;
-    if (size > k) {              // we overshot capacity — the smallest falls off
-      dropSmallest();
-    }
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   public T get(int index) {
     if (index < 0 || index >= size) {
       throw new IndexOutOfBoundsException();
     }
-    return arr[size - 1 - index];  // index 0 is the highest, stored at the top
+    // TODO: Implement me
+    throw new UnsupportedOperationException("TODO: Implement me");
   }
 
   public int size() {
