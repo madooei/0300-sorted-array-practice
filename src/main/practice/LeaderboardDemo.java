@@ -1,9 +1,11 @@
 package practice;
 
 /** A runnable demo of Leaderboard: a jumbled sequence of scores, top-k kept, best first. */
-public final class PracticeMain {
+public final class LeaderboardDemo {
 
-  private PracticeMain() {}
+  private LeaderboardDemo() {
+    // This class should not be instantiated!
+  }
 
   public static void main(String[] args) {
     Leaderboard<Integer> board = new Leaderboard<>(3);
